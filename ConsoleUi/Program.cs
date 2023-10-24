@@ -18,6 +18,7 @@ namespace ConsoleUi
                 Console.WriteLine("1. Login");
                 Console.WriteLine("2. Sign Up");
                 Console.WriteLine("3. View Leaderboard");
+                Console.WriteLine("4. In Game");
                 Console.WriteLine("x. Exit");
                 Console.Write("Please select an option: ");
                 string choice = Console.ReadLine();
@@ -42,6 +43,10 @@ namespace ConsoleUi
                         Console.WriteLine("");
                         Leaderboard.DisplayLeaderboardOverall();
                         Console.WriteLine("");
+                        break;
+
+                    case "4":
+                        GameMenu();
                         break;
 
                     case "X":
@@ -76,8 +81,7 @@ namespace ConsoleUi
                 {
                     case "1":
                         Console.WriteLine("");
-                        // Add snake game here
-                        // Write score
+                        new ConsoleUi.Game().Start();
                         break;
 
                     case "2":
