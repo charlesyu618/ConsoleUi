@@ -9,8 +9,9 @@ namespace ConsoleUi
     {
         static string connectionString = @"Data Source=charles\SQLEXPRESS;Initial Catalog=leaderboard;Integrated Security=True;";
 
-        public static void register()
+        public static string register()
         {
+            string username;
             //Console.WriteLine("   Welcome to the Snake Game");
             Console.WriteLine("           Sign Up");
             Console.WriteLine("------------------------------");
@@ -18,7 +19,7 @@ namespace ConsoleUi
             while (true)
             {
                 Console.Write("Enter username: ");
-                string username = Console.ReadLine();
+                username = Console.ReadLine();
 
                 Console.Write("Enter password: ");
                 string password = ReadPassword();
@@ -28,15 +29,24 @@ namespace ConsoleUi
 
                 if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmPassword))
                 {
-                    Console.WriteLine("Please fill mandatory fields");
+                    Console.Clear();
+                    Console.WriteLine("Please fill mandatory fields!\n");
+                    Console.WriteLine("           Sign Up");
+                    Console.WriteLine("------------------------------");
                 }
                 else if (password != confirmPassword)
                 {
-                    Console.WriteLine("Password does not match");
+                    Console.Clear();
+                    Console.WriteLine("Password does not match!\n");
+                    Console.WriteLine("           Sign Up");
+                    Console.WriteLine("------------------------------");
                 }
                 else if (IsUsernameExists(username))
                 {
-                    Console.WriteLine("Username already exists. Please try another.");
+                    Console.Clear();
+                    Console.WriteLine("Username already exists. Please try another!\n");
+                    Console.WriteLine("           Sign Up");
+                    Console.WriteLine("------------------------------");
                 }
                 else
                 {
@@ -57,6 +67,7 @@ namespace ConsoleUi
                     break;
                 }
             }
+            return username;
         }
 
         private static bool IsUsernameExists(string gamer_name)
@@ -86,8 +97,11 @@ namespace ConsoleUi
                 }
                 else if (key.Key == ConsoleKey.Backspace && password.Length > 0)
                 {
-                    password = password.Substring(0, (password.Length - 1));
-                    Console.Write("\b \b");
+                    if (password.Length > 0)
+                    {
+                        password = password.Substring(0, (password.Length - 1));
+                        Console.Write("\b \b");
+                    }
                 }
                 else
                 {

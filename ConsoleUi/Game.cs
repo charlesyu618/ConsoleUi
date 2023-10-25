@@ -43,7 +43,7 @@ namespace ConsoleUi
             score.Initialize();
         }
 
-        public void Start()
+        public int Start()
         {
             while (!GameOver)
             {
@@ -73,7 +73,7 @@ namespace ConsoleUi
                 if (snake.Tail.Contains(snake.Head))
                 {
                     EndGame();
-                    return;
+                    return score.Current;
                 }
                 // Snake touch the fruit --> Score increase
                 else if (snake.Head == fruit.Location)
@@ -109,7 +109,7 @@ namespace ConsoleUi
                     if (OneMoreLife != true)    // Check for the special fruit
                     {
                         EndGame();
-                        return;
+                        return score.Current;
                     }
                     else
                     {
@@ -152,6 +152,7 @@ namespace ConsoleUi
                     Thread.Sleep(Settings.HeartBeatMilliseconds / 7);
                 }
             }
+            return score.Current;
         }
 
         private void EndGame()

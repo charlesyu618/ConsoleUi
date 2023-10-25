@@ -5,12 +5,13 @@ using BCrypt.Net;
 
 namespace ConsoleUi
 {
-    class LogIn
+    class Login
     {
         static string connectionString = @"Data Source=charles\SQLEXPRESS;Initial Catalog=leaderboard;Integrated Security=True;";
 
-        public static void login()
+        public static string login()
         {
+            string username;
             //Console.WriteLine("   Welcome to the Snake Game");
             Console.WriteLine("            Log in");
             Console.WriteLine("------------------------------");
@@ -18,18 +19,24 @@ namespace ConsoleUi
             while (true)
             {
                 Console.Write("Enter username: ");
-                string username = Console.ReadLine();
+                username = Console.ReadLine();
 
                 Console.Write("Enter password: ");
                 string password = ReadPassword();
 
                 if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 {
-                    Console.WriteLine("Please fill mandatory fields");
+                    Console.Clear();
+                    Console.WriteLine("Please fill mandatory fields!\n");
+                    Console.WriteLine("            Log in");
+                    Console.WriteLine("------------------------------");
                 }
                 else if (!IsUsernameExists(username))
                 {
-                    Console.WriteLine("Login failed, the username does not exist");
+                    Console.Clear();
+                    Console.WriteLine("Login failed, the username does not exist!\n");
+                    Console.WriteLine("            Log in");
+                    Console.WriteLine("------------------------------");
                 }
                 else
                 {
@@ -49,11 +56,16 @@ namespace ConsoleUi
                         }
                         else
                         {
-                            Console.WriteLine("Incorrect password, please try again");
+                            Console.Clear();
+                            Console.WriteLine("Incorrect password, please try again!\n");
+                            Console.WriteLine("            Log in");
+                            Console.WriteLine("------------------------------");
                         }
                     }
                 }
             }
+
+            return username;
         }
 
         private static bool IsUsernameExists(string gamer_name)
@@ -81,10 +93,13 @@ namespace ConsoleUi
                     Console.WriteLine();
                     break;
                 }
-                else if (key.Key == ConsoleKey.Backspace && password.Length > 0)
+                else if (key.Key == ConsoleKey.Backspace && password.Length >= 0)
                 {
-                    password = password.Substring(0, (password.Length - 1));
-                    Console.Write("\b \b");
+                    if (password.Length > 0)
+                    {
+                        password = password.Substring(0, (password.Length - 1));
+                        Console.Write("\b \b");
+                    }
                 }
                 else
                 {

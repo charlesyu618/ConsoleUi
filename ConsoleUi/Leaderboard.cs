@@ -22,12 +22,36 @@ namespace ConsoleUi
                 sql_con.Open();
                 SqlDataReader reader = sql_cmd.ExecuteReader();
 
+                int times = 0;
+
                 while (reader.Read())
                 {
                     string gamerName = reader["gamer_name"].ToString();
                     int score = (int)reader["max_score"];
 
+                    Console.Write(times);
                     Console.WriteLine($"{gamerName.PadRight(20)}: {score}");
+                    times++;
+                    if (times == 10)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            // wait for user to quit
+            while (true)
+            {
+                Console.Write("Press 'x' to quit: ");
+                string userInput = Console.ReadLine();
+
+                if (userInput.ToLower() == "x")
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice. Please select a valid option.");
                 }
             }
         }
@@ -58,6 +82,22 @@ namespace ConsoleUi
                     Console.WriteLine($"{gamerName.PadRight(20)}: {score}");
                 }
             }
+
+            // wait for user to quit
+            while (true)
+            {
+                Console.Write("Press 'x' to quit: ");
+                string userInput = Console.ReadLine();
+
+                if (userInput.ToLower() == "x")
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice. Please select a valid option.");
+                }
+            }
         }
 
         //  to do
@@ -84,6 +124,22 @@ namespace ConsoleUi
                     int score = (int)reader["max_score"];
 
                     Console.WriteLine($"{gamerName.PadRight(20)}: {score}");
+                }
+            }
+
+            // wait for user to quit
+            while (true)
+            {
+                Console.Write("Press 'x' to quit: ");
+                string userInput = Console.ReadLine();
+
+                if (userInput.ToLower() == "x")
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice. Please select a valid option.");
                 }
             }
         }
