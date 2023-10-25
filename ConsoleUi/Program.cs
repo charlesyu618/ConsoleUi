@@ -119,7 +119,7 @@ namespace ConsoleUi
                 {
                     case "1":
                         Console.Clear();
-                        gameScore = new ConsoleUi.Game().Start();
+                        gameScore = new ConsoleUi.Game().Start(gamerID);
                         Console.Clear();
                         // new bug: can only insert score when gamer choose no for restart option 
                         InsertScore(gamerID, DateTime.Now.Date, gameScore);
@@ -205,7 +205,7 @@ namespace ConsoleUi
         }
 
 
-        static void InsertScore(int gamerId, DateTime date, int score)
+        public static void InsertScore(int gamerId, DateTime date, int score)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
