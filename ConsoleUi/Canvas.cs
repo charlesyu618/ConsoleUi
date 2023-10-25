@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +21,7 @@ namespace ConsoleUi
 
         public void Draw()
         {
+            Console.Clear();
 
             FormatConsole();
 
@@ -48,13 +49,12 @@ namespace ConsoleUi
 
             void FormatConsole()
             {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    Console.SetWindowSize(Settings.Canvas.Size.Right, Settings.Canvas.Size.Bottom);
-                    Console.SetBufferSize(Settings.Canvas.Size.Right, Settings.Canvas.Size.Bottom);
-                }
+                //if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                //{
+                //    Console.SetWindowSize(Settings.Canvas.Size.Right, Settings.Canvas.Size.Bottom);
+                //    Console.SetBufferSize(Settings.Canvas.Size.Right, Settings.Canvas.Size.Bottom);
+                //}
                 Console.CursorVisible = false;
-
 
             }
         }
