@@ -7,7 +7,7 @@ namespace ConsoleUi
 {
     class SignUp
     {
-        static string connectionString = @"Data Source=charles\SQLEXPRESS;Initial Catalog=leaderboard;Integrated Security=True;";
+        static string connectionString = "Server=5900sql.infosci.cornell.edu;Database=leaderboard;User Id=test;Password=test2023;";
 
         public static string register()
         {

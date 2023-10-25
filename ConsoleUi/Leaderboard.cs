@@ -4,7 +4,7 @@ namespace ConsoleUi
 {
     class Leaderboard
     {
-        static string connectionString = @"Data Source=charles\SQLEXPRESS;Initial Catalog=leaderboard;Integrated Security=True;";
+        static string connectionString = "Server=5900sql.infosci.cornell.edu;Database=leaderboard;User Id=test;Password=test2023;";
         public static void DisplayLeaderboardOverall()
         {
             Console.WriteLine("  Top 10 Leaderboard Scores");

@@ -5,11 +5,11 @@ namespace ConsoleUi
 {
     class Program
     {
-        static string connectionString = @"Data Source=charles\SQLEXPRESS;Initial Catalog=leaderboard;Integrated Security=True;";
+        static string connectionString = "Server=5900sql.infosci.cornell.edu;Database=leaderboard;User Id=test;Password=test2023;";
 
         static void Main(string[] args)
         {
-            MainMenu();
+            SignUp.register();
         }
 
         static void MainMenu()
