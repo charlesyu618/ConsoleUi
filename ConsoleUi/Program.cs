@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data.SqlClient;
 
 namespace ConsoleUi
@@ -9,7 +9,8 @@ namespace ConsoleUi
 
         static void Main(string[] args)
         {
-            SignUp.register();
+            
+            Program.MainMenu();
         }
 
         static void MainMenu()
@@ -121,7 +122,7 @@ namespace ConsoleUi
                         gameScore = new ConsoleUi.Game().Start();
                         Console.Clear();
                         // new bug: can only insert score when gamer choose no for restart option 
-                        InsertScore(gamerID, DateTime.Now, gameScore);
+                        InsertScore(gamerID, DateTime.Now.Date, gameScore);
                         break;
 
                     case "2":
@@ -210,7 +211,7 @@ namespace ConsoleUi
             {
                 connection.Open();
 
-                string insertQuery = "INSERT INTO [leaderboard].[dbo].[Score] ([gamer_id], [date], [score]) VALUES (@GamerId, @Date, @Score)";
+                string insertQuery = "INSERT INTO [leaderboard].[dbo].[Score] ([gamer_id], [date_time], [score]) VALUES (@GamerId, @Date, @Score)";
 
                 using (SqlCommand command = new SqlCommand(insertQuery, connection))
                 {
