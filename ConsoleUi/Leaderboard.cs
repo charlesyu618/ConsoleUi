@@ -1,4 +1,4 @@
-﻿using System.Data.SqlClient;
+using System.Data.SqlClient;
 
 namespace ConsoleUi
 {
@@ -66,7 +66,7 @@ namespace ConsoleUi
                                    s.gamer_id, g.gamer_name, MAX(s.score) AS max_score
                              FROM [leaderboard].[dbo].[Gamer] g 
                              JOIN [leaderboard].[dbo].[Score] s ON g.gamer_id = s.gamer_id
-                             WHERE DATEDIFF(day, s.date, GETDATE()) = 0 -- update leaderboard the 1st day in month (00:00) 
+                             WHERE DATEDIFF(day, s.date_time, GETDATE()) = 0 -- update leaderboard the 1st day in month (00:00) 
                              GROUP BY s.gamer_id, g.gamer_name
                              ORDER BY max_score DESC;";
 
@@ -112,7 +112,7 @@ namespace ConsoleUi
                                    s.gamer_id, g.gamer_name, MAX(s.score) AS max_score
                              FROM [leaderboard].[dbo].[Gamer] g 
                              JOIN [leaderboard].[dbo].[Score] s ON g.gamer_id = s.gamer_id
-                             WHERE DATEDIFF(week, s.date, GETDATE()) = 0
+                             WHERE DATEDIFF(week, s.date_time, GETDATE()) = 0
                              GROUP BY s.gamer_id, g.gamer_name
                              ORDER BY max_score DESC;";
 
@@ -158,7 +158,7 @@ namespace ConsoleUi
                                    s.gamer_id, g.gamer_name, MAX(s.score) AS max_score
                              FROM [leaderboard].[dbo].[Gamer] g 
                              JOIN [leaderboard].[dbo].[Score] s ON g.gamer_id = s.gamer_id
-                             WHERE DATEDIFF(month, s.date, GETDATE()) = 0
+                             WHERE DATEDIFF(month, s.date_time, GETDATE()) = 0
                              GROUP BY s.gamer_id, g.gamer_name
                              ORDER BY max_score DESC;";
 
