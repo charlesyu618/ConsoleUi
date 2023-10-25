@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -36,6 +36,7 @@ namespace ConsoleUi
 
         public void Initialize()
         {
+            Console.Clear();
             canvas.Draw();
             snake.Initialize(canvas);
             fruit.Spawn(canvas, snake, score);
@@ -43,8 +44,9 @@ namespace ConsoleUi
             score.Initialize();
         }
 
-        public int Start()
+        public int Start(int GamerId)
         {
+
             while (!GameOver)
             {
                 if (Console.KeyAvailable)
@@ -57,7 +59,6 @@ namespace ConsoleUi
                     {
                         GameIsPause = !GameIsPause;
                     }
-
                 }
 
                 // If the game is pause
@@ -72,7 +73,7 @@ namespace ConsoleUi
                 // Snake touch itself --> End game
                 if (snake.Tail.Contains(snake.Head))
                 {
-                    EndGame();
+                    EndGame(GamerId);
                     return score.Current;
                 }
                 // Snake touch the fruit --> Score increase
@@ -108,7 +109,7 @@ namespace ConsoleUi
                 {
                     if (OneMoreLife != true)    // Check for the special fruit
                     {
-                        EndGame();
+                        EndGame(GamerId);
                         return score.Current;
                     }
                     else
@@ -155,15 +156,17 @@ namespace ConsoleUi
             return score.Current;
         }
 
-        private void EndGame()
+        private void EndGame(int GamerId)
         {
             GameOver = true;
+
+            Program.InsertScore(GamerId, DateTime.Now.Date, score.Current);
 
             if (gamer.AskRestart())
             {
                 Console.Clear();
                 Initialize();
-                Start();
+                Start(GamerId);
             }
         }
     }
