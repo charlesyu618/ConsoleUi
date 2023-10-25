@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +17,7 @@ namespace ConsoleUi
 
         public struct Canvas
         {
-            public static readonly Rectangle Size = new(5, 5, 50, 25);
+            public static readonly Rectangle Size = new(0, 1, 50, 25);
             public static readonly char HorizontalChar = '─';
             public static readonly char VerticalChar = '│';
             public static readonly char TopLeftChar = '┌';
