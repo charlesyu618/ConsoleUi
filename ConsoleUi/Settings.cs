@@ -17,7 +17,7 @@ namespace ConsoleUi
 
         public struct Canvas
         {
-            public static readonly Rectangle Size = new(0, 1, 50, 25);
+            public static readonly Rectangle Size = new(0, 0, 50, 25);
             public static readonly char HorizontalChar = '─';
             public static readonly char VerticalChar = '│';
             public static readonly char TopLeftChar = '┌';
@@ -33,10 +33,10 @@ namespace ConsoleUi
 
         public struct Snake
         {
-            public static readonly char HeadRightChar = '▶'; // Use Unicode format
-            public static readonly char HeadLeftChar = '◀'; // Windows default: ANSI?
-            public static readonly char HeadUpChar = '▲';
-            public static readonly char HeadDownChar = '▼';
+            public static readonly char HeadRightChar = '>'; // Use Unicode format
+            public static readonly char HeadLeftChar = '<'; // Windows default: ANSI?
+            public static readonly char HeadUpChar = 'A';
+            public static readonly char HeadDownChar = 'V';
             public static readonly char HeadStopChar = '■';
             public static readonly char TailChar = ' ';
 

@@ -162,7 +162,7 @@ namespace ConsoleUi
 
             Program.InsertScore(GamerId, DateTime.Now.Date, score.Current);
 
-            if (gamer.AskRestart())
+            if (gamer.AskRestart(score.Current))
             {
                 Console.Clear();
                 Initialize();

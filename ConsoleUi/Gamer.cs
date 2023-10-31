@@ -22,9 +22,10 @@ namespace ConsoleUi
             throw new NotImplementedException();
         }
 
-        public bool AskRestart()
+        public bool AskRestart(int score)
         {
-            Utility.Write("Game Over! Do you want to restart? (Y/N)", 0, 0, ConsoleColor.Red, ConsoleColor.White);
+            Utility.Write($"Score: {score}", 20, 10, ConsoleColor.Red, ConsoleColor.White);
+            Utility.Write("Game Over! Do you want to restart? (Y/N)", 5, 11, ConsoleColor.Red, ConsoleColor.White);
             Utility.WaitFor(out var key, ConsoleKey.Y, ConsoleKey.N);
             return key == ConsoleKey.Y;
         }
