@@ -24,7 +24,6 @@ namespace ConsoleUi
                 Console.WriteLine("1. Login");
                 Console.WriteLine("2. Sign Up");
                 Console.WriteLine("3. View Leaderboard");
-                Console.WriteLine("4. Test GameMenu");
                 Console.WriteLine("x. Exit");
                 Console.Write("Please select an option: ");
                 string choice = Console.ReadLine();
@@ -48,12 +47,6 @@ namespace ConsoleUi
                     case "3":
                         Console.Clear();
                         ViewLeaderboard();
-                        Console.Clear();
-                        break;
-
-                    case "4":
-                        Console.Clear();
-                        GameMenu("Player_XXX");
                         Console.Clear();
                         break;
 
