@@ -132,26 +132,34 @@ namespace ConsoleUi
                 }
 
                 // Control the fresh rate for different stage
-                if (score.Current < 20 && score.Current >= 0)
+                if (score.Current >= 0)
                 {
-                    Thread.Sleep(Settings.HeartBeatMilliseconds / 2);
+                    int sleepDuration = Settings.HeartBeatMilliseconds;
+
+                    if (score.Current < 20)
+                    {
+                        sleepDuration /= 2;
+                    }
+                    else if (score.Current <= 50)
+                    {
+                        sleepDuration /= 3;
+                    }
+                    else if (score.Current <= 80)
+                    {
+                        sleepDuration /= 5;
+                    }
+                    else if (ConstantSpeed)
+                    {
+                        sleepDuration /= 3;
+                    }
+                    else
+                    {
+                        sleepDuration /= 7;
+                    }
+
+                    Thread.Sleep(sleepDuration);
                 }
-                else if (score.Current >= 20 && score.Current <= 40)
-                {
-                    Thread.Sleep(Settings.HeartBeatMilliseconds / 3);
-                }
-                else if (score.Current > 40 && score.Current <= 60)
-                {
-                    Thread.Sleep(Settings.HeartBeatMilliseconds / 5);
-                }
-                else if (ConstantSpeed == true)
-                {
-                    Thread.Sleep(Settings.HeartBeatMilliseconds / 3);
-                }
-                else
-                {
-                    Thread.Sleep(Settings.HeartBeatMilliseconds / 7);
-                }
+
             }
             return score.Current;
         }
