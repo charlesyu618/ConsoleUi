@@ -6,10 +6,13 @@ namespace ConsoleUi
     class Program
     {
         static string connectionString = DatabaseConnection.ConnectionString;
+        static MusicPlayer musicPlayer = new MusicPlayer();
 
         static void Main(string[] args)
         {
-            
+            Thread musicThread = new Thread(musicPlayer.PlayBackgroundMusic1);
+            musicThread.Start();
+
             Program.MainMenu();
         }
 
@@ -111,6 +114,7 @@ namespace ConsoleUi
                 switch (choice)
                 {
                     case "1":
+                        musicPlayer.StopBackgroundMusic();
                         Console.Clear();
                         gameScore = new ConsoleUi.Game().Start(gamerID);
                         Console.Clear();
