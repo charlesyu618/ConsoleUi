@@ -30,7 +30,7 @@ namespace ConsoleUi
                     string gamerName = reader["gamer_name"].ToString();
                     int score = (int)reader["max_score"];
 
-                   
+
                     Console.WriteLine($"{times}: {gamerName.PadRight(20)}: {score}");
                     times++;
                     if (times == 10)
@@ -217,3 +217,4 @@ namespace ConsoleUi
         }
     }
 }
+
