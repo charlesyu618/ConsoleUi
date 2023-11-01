@@ -25,7 +25,7 @@ namespace ConsoleUi
             // Sleep to keep the music playing
             while (true)
             {
-                Thread.Sleep(1000); // Adjust the sleep duration as needed
+                Thread.Sleep(1000);
             }
         }
 
