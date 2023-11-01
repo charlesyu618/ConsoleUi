@@ -12,8 +12,8 @@ namespace ConsoleUi
         public void PlayBackgroundMusic1()
         {
 
-            // string currentDirectory = Directory.GetCurrentDirectory();
-            // Console.WriteLine("Current Directory: " + currentDirectory);
+            string currentDirectory = Directory.GetCurrentDirectory();
+            Console.WriteLine("Current Directory: " + currentDirectory);
             
             string audioFilePath = "arcade_game_music.mp3";
 
@@ -22,7 +22,7 @@ namespace ConsoleUi
             outputDevice.Init(audioFile);
             outputDevice.Play();
 
-            // Sleep to keep the music playing
+            //Sleep to keep the music playing
             while (true)
             {
                 Thread.Sleep(1000);
