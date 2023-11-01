@@ -1,49 +1,103 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ConsoleUi;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
-namespace ConsoleUi
+internal class UserHistoryScores
 {
-    internal class UserHistoryScores
+    static string connectionString = DatabaseConnection.ConnectionString;
+
+    public static void DisplayTop10HistoryScores(int gamerID, string name)
     {
-        static string connectionString = DatabaseConnection.ConnectionString;
+        Console.WriteLine($"TOP 10 History Score of {name}!\n");
+        Console.WriteLine("------------------------------");
 
-        public static void DisplayUserHistoryScores()
+        string query = @"
+            SELECT TOP 10 s.score, s.date_time
+            FROM [leaderboard].[dbo].[Gamer] g
+            JOIN [leaderboard].[dbo].[Score] s ON g.gamer_id = s.gamer_id
+            WHERE g.gamer_id = @GamerId
+            ORDER BY s.score DESC";
+
+        using (SqlConnection sql_con = new SqlConnection(connectionString))
+        using (SqlCommand sql_cmd = new SqlCommand(query, sql_con))
         {
-            Console.WriteLine("History Score of " + name + "!\n");
-            Console.WriteLine("------------------------------");
+            sql_cmd.Parameters.AddWithValue("@GamerId", gamerID);
+            sql_con.Open();
+            SqlDataReader reader = sql_cmd.ExecuteReader();
 
-            string query = @"SELECT s.score, s.data_time
-                             FROM [leaderboard].[dbo].[Gamer] g
-                             JOIN [leaderboard].[dbo].[Score] s ON g.gamer_id = s.gamer_id
-                             WHERE name = g.gamer_name
-                             ORDER BY s.data_time DESC;";
+            int times = 1;
 
-            using (SqlConnection sql_con = new SqlConnection(connectionString))
-            using (SqlCommand sql_cmd = new SqlCommand(query, sql_con))
+            while (reader.Read())
             {
-                sql_con.Open();
-                SqlDataReader reader = sql_cmd.ExecuteReader();
+                int score = (int)reader["score"];
+                DateTime date = (DateTime)reader["date_time"];
 
-                int times = 0;
-
-                while (reader.Read())
-                {
-                    string gamerName = reader["gamer_name"].ToString();
-                    int score = (int)reader["max_score"];
-
-                    Console.Write(times);
-                    Console.WriteLine($"{gamerName.PadRight(20)}: {score}");
-                    times++;
-                    if (times == 10)
-                    {
-                        break;
-                    }
-                }
+                Console.WriteLine($"{times}. Score: {score}, Date: {date}");
+                times++;
             }
         }
+
+        // Wait for the user to quit
+        while (true)
+        {
+            Console.Write("Press 'x' to quit: ");
+            string userInput = Console.ReadLine();
+
+            if (userInput.ToLower() == "x")
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice. Please select a valid option.");
+            }
+        }
+    }
+
+    public static void DisplayRecent10HistoryScores(int gamerID, string name)
+    {
+        Console.WriteLine($"Recent 10 History Score of {name}!\n");
+        Console.WriteLine("------------------------------");
+
+        string query = @"
+            SELECT TOP 10 s.score, s.date_time
+            FROM [leaderboard].[dbo].[Gamer] g
+            JOIN [leaderboard].[dbo].[Score] s ON g.gamer_id = s.gamer_id
+            WHERE g.gamer_id = @GamerId
+            ORDER BY s.date_time DESC;";
+
+        using (SqlConnection sql_con = new SqlConnection(connectionString))
+        using (SqlCommand sql_cmd = new SqlCommand(query, sql_con))
+        {
+            sql_cmd.Parameters.AddWithValue("@GamerId", gamerID);
+            sql_con.Open();
+            SqlDataReader reader = sql_cmd.ExecuteReader();
+
+            int times = 1; // Start from 1
+
+            while (reader.Read())
+            {
+                int score = (int)reader["score"];
+                DateTime date = (DateTime)reader["date_time"];
+
+                Console.WriteLine($"{times}. Score: {score}, Date: {date}");
+                times++;
+            }
+        }
+
+        // Wait for the user to quit
+        while (true)
+        {
+            Console.Write("Press 'x' to quit: ");
+            string userInput = Console.ReadLine();
+
+            if (userInput.ToLower() == "x")
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice. Please select a valid option.");
+            }
+        }
+    }
 }

@@ -23,15 +23,15 @@ namespace ConsoleUi
                 sql_con.Open();
                 SqlDataReader reader = sql_cmd.ExecuteReader();
 
-                int times = 0;
+                int times = 1;
 
                 while (reader.Read())
                 {
                     string gamerName = reader["gamer_name"].ToString();
                     int score = (int)reader["max_score"];
 
-                    Console.Write(times);
-                    Console.WriteLine($"{gamerName.PadRight(20)}: {score}");
+                   
+                    Console.WriteLine($"{times}: {gamerName.PadRight(20)}: {score}");
                     times++;
                     if (times == 10)
                     {
@@ -67,7 +67,7 @@ namespace ConsoleUi
                                    s.gamer_id, g.gamer_name, MAX(s.score) AS max_score
                              FROM [leaderboard].[dbo].[Gamer] g 
                              JOIN [leaderboard].[dbo].[Score] s ON g.gamer_id = s.gamer_id
-                             WHERE DATEDIFF(day, s.date_time, GETDATE()) = 0 -- update leaderboard the 1st day in month (00:00) 
+                             WHERE DATEPART(day, s.date_time) = DATEPART(day, GETDATE())
                              GROUP BY s.gamer_id, g.gamer_name
                              ORDER BY max_score DESC;";
 
@@ -77,12 +77,19 @@ namespace ConsoleUi
                 sql_con.Open();
                 SqlDataReader reader = sql_cmd.ExecuteReader();
 
+                int times = 1;
+
                 while (reader.Read())
                 {
                     string gamerName = reader["gamer_name"].ToString();
                     int score = (int)reader["max_score"];
 
-                    Console.WriteLine($"{gamerName.PadRight(20)}: {score}");
+                    Console.WriteLine($"{times}: {gamerName.PadRight(20)}: {score}");
+                    times++;
+                    if (times == 10)
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -113,7 +120,7 @@ namespace ConsoleUi
                                    s.gamer_id, g.gamer_name, MAX(s.score) AS max_score
                              FROM [leaderboard].[dbo].[Gamer] g 
                              JOIN [leaderboard].[dbo].[Score] s ON g.gamer_id = s.gamer_id
-                             WHERE DATEDIFF(week, s.date_time, GETDATE()) = 0
+                             WHERE DATEPART(week, s.date_time) = DATEPART(week, GETDATE())
                              GROUP BY s.gamer_id, g.gamer_name
                              ORDER BY max_score DESC;";
 
@@ -123,12 +130,19 @@ namespace ConsoleUi
                 sql_con.Open();
                 SqlDataReader reader = sql_cmd.ExecuteReader();
 
+                int times = 1;
+
                 while (reader.Read())
                 {
                     string gamerName = reader["gamer_name"].ToString();
                     int score = (int)reader["max_score"];
 
-                    Console.WriteLine($"{gamerName.PadRight(20)}: {score}");
+                    Console.WriteLine($"{times}: {gamerName.PadRight(20)}: {score}");
+                    times++;
+                    if (times == 10)
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -159,7 +173,7 @@ namespace ConsoleUi
                                    s.gamer_id, g.gamer_name, MAX(s.score) AS max_score
                              FROM [leaderboard].[dbo].[Gamer] g 
                              JOIN [leaderboard].[dbo].[Score] s ON g.gamer_id = s.gamer_id
-                             WHERE DATEDIFF(month, s.date_time, GETDATE()) = 0
+                             WHERE DATEPART(month, s.date_time) = DATEPART(month, GETDATE())
                              GROUP BY s.gamer_id, g.gamer_name
                              ORDER BY max_score DESC;";
 
@@ -169,12 +183,19 @@ namespace ConsoleUi
                 sql_con.Open();
                 SqlDataReader reader = sql_cmd.ExecuteReader();
 
+                int times = 1;
+
                 while (reader.Read())
                 {
                     string gamerName = reader["gamer_name"].ToString();
                     int score = (int)reader["max_score"];
 
-                    Console.WriteLine($"{gamerName.PadRight(20)}: {score}");
+                    Console.WriteLine($"{times}: {gamerName.PadRight(20)}: {score}");
+                    times++;
+                    if (times == 10)
+                    {
+                        break;
+                    }
                 }
             }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Data.SqlClient;
+using System.Xml.Linq;
 
 namespace ConsoleUi
 {
@@ -65,7 +66,7 @@ namespace ConsoleUi
 
         static void GameMenu(string name)
         {
-            string userName = name;
+  
             int gamerID = -1;
 
             // Get gamer_id from db
@@ -74,7 +75,7 @@ namespace ConsoleUi
                 connection.Open();
                 using (SqlCommand command = new SqlCommand("SELECT [gamer_id] FROM [leaderboard].[dbo].[Gamer] WHERE [gamer_name] = @GamerName", connection))
                 {
-                    command.Parameters.AddWithValue("@GamerName", userName);
+                    command.Parameters.AddWithValue("@GamerName", name);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
@@ -102,7 +103,8 @@ namespace ConsoleUi
 
                 Console.WriteLine("1. Game Start!");
                 Console.WriteLine("2. View Leaderboard");
-                Console.WriteLine("3. Log Out");
+                Console.WriteLine("3. My History Scores");
+                Console.WriteLine("4. Log Out");
                 Console.WriteLine("x. Exit");
                 Console.Write("Please select an option: ");
                 string choice = Console.ReadLine();
@@ -125,6 +127,11 @@ namespace ConsoleUi
                         break;
 
                     case "3":
+                        Console.Clear();
+                        ViewHistoryScores(gamerID, name);
+                        return;
+
+                    case "4":
                         Console.Clear();
                         MainMenu();
                         return;
@@ -197,6 +204,46 @@ namespace ConsoleUi
             }
         }
 
+        static void ViewHistoryScores(int gamerID,string name)
+        {
+            bool backToGameMenu = false;
+
+            while (!backToGameMenu)
+            {
+                Console.WriteLine($"History Score of {name}!\n");
+                Console.WriteLine("1. My TOP 10 History Scores");
+                Console.WriteLine("2. My Recent 10 History Scores");
+                Console.WriteLine("x. Back to Game Menu");
+                Console.Write("Please select an option: ");
+                string historyChoice = Console.ReadLine();
+
+                switch (historyChoice)
+                {
+                    case "1":
+                        Console.Clear();
+                        UserHistoryScores.DisplayTop10HistoryScores(gamerID,name);
+                        Console.Clear();
+                        break;
+
+                    case "2":
+                        Console.Clear();
+                        UserHistoryScores.DisplayRecent10HistoryScores(gamerID,name);
+                        Console.Clear();
+                        break;
+
+                    case "X":
+                    case "x":
+                        Console.Clear();
+                        GameMenu(name);
+                        return;
+
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Invalid choice. Please select a valid option.\n");
+                        break;
+                }
+            }
+        }
 
         public static void InsertScore(int gamerId, DateTime date, int score)
         {
