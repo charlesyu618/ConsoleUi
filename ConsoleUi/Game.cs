@@ -168,7 +168,10 @@ namespace ConsoleUi
         {
             GameOver = true;
 
-            Program.InsertScore(GamerId, DateTime.Now.Date, score.Current);
+            DateTime currentDateWithCurrentTime = DateTime.Now.Date + DateTime.Now.TimeOfDay;
+
+
+            Program.InsertScore(GamerId, currentDateWithCurrentTime, score.Current);
 
             if (gamer.AskRestart(score.Current))
             {
