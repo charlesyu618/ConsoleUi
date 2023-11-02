@@ -8,22 +8,25 @@ namespace ConsoleUi
     {
         private WaveOutEvent outputDevice;
         private AudioFileReader audioFile;
+        private string audioFilePath1 = "arcade_game_music.mp3";
 
         public void PlayBackgroundMusic1()
         {
+            while (true)
+            {
+                PlayMusic();
+            }
+        }
 
-            string currentDirectory = Directory.GetCurrentDirectory();
-            Console.WriteLine("Current Directory: " + currentDirectory);
-            
-            string audioFilePath = "arcade_game_music.mp3";
-
-            audioFile = new AudioFileReader(audioFilePath);
+        private void PlayMusic()
+        {
+            audioFile = new AudioFileReader(audioFilePath1);
             outputDevice = new WaveOutEvent();
             outputDevice.Init(audioFile);
             outputDevice.Play();
 
-            //Sleep to keep the music playing
-            while (true)
+            // Sleep until the audio file reaches the end
+            while (outputDevice.PlaybackState == PlaybackState.Playing)
             {
                 Thread.Sleep(1000);
             }

@@ -18,7 +18,7 @@ namespace ConsoleUi
 
             while (true)
             {
-                Console.Write("Enter username: ");
+                Console.Write("Enter username (or press 'Esc' to go back): ");
                 username = Console.ReadLine();
 
                 Console.Write("Enter password: ");
