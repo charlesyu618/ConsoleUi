@@ -120,8 +120,6 @@ namespace ConsoleUi
                         Console.Clear();
                         gameScore = new ConsoleUi.Game().Start(gamerID);
                         Console.Clear();
-                        // new bug: can only insert score when gamer choose no for restart option 
-                        InsertScore(gamerID, DateTime.Now.Date, gameScore);
                         break;
 
                     case "2":
