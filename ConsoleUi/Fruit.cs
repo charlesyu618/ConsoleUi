@@ -33,35 +33,35 @@ namespace ConsoleUi
 
             // judge whether the fruit is special
             Random rd = new Random();
-            TypeValue = rd.Next(0, 10);
+            TypeValue = rd.Next(0, 20);
 
-            if (TypeValue <= 7)
+            if (TypeValue <= 16)
             {
                 FruitType = Effect.Normal;  // Current fruit is normal
 
-                if (score.Current <= 10)
+                if (score.Current <= 25)
                 {
                     Value = Random.Shared.Next(1, 10);
                 }
-                else if (score.Current > 10)
+                else if (score.Current > 25)
                 {
                     Value = Random.Shared.Next(2, 5);
                 }
 
                 Utility.Write(Value.ToString(), Location.X, Location.Y, Settings.Fruit.Foreground, Settings.Fruit.Background);
             }
-            else if (TypeValue == 8)
+            else if (TypeValue == 17)
             {
                 FruitType = Effect.Life;    // One more life
                 Value = 1;
                 Utility.Write(Value.ToString(), Location.X, Location.Y, ConsoleColor.Red, Settings.Fruit.Background);
             }
-            else   // 9
+            else   // 18~19
             {
                 FruitType = Effect.Slower;  // Move slower
                 Value = 1;
                 Utility.Write(Value.ToString(), Location.X, Location.Y, ConsoleColor.Green, Settings.Fruit.Background);
-                // todo: Change the fruit existence time
+                
             }
         }
     }
