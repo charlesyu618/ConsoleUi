@@ -129,6 +129,7 @@ namespace ConsoleUi
                         musicPlayer.StopBackgroundMusic();
                         Console.Clear();
                         gameScore = new Game().Start(gamerID);
+                        Thread.Sleep(500);
                         musicPlayer.PlayBackgroundMusic1(true);
                         Console.Clear();
                         break;

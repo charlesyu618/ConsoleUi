@@ -185,6 +185,7 @@ namespace ConsoleUi
                 Initialize();
                 Start(GamerId);
             }
+            musicPlayer.StopBackgroundMusic();
         }
     }
 }
