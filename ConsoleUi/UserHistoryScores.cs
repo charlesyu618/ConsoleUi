@@ -7,7 +7,7 @@ internal class UserHistoryScores
 
     public static void DisplayTop10HistoryScores(int gamerID, string name)
     {
-        Console.WriteLine($"TOP 10 History Score of {name}!\n");
+        Console.WriteLine($"TOP 10 History Score of {name}!");
         Console.WriteLine("------------------------------");
 
         string query = @"
@@ -55,7 +55,7 @@ internal class UserHistoryScores
 
     public static void DisplayRecent10HistoryScores(int gamerID, string name)
     {
-        Console.WriteLine($"Recent 10 History Score of {name}!\n");
+        Console.WriteLine($"Recent 10 History Score of {name}!");
         Console.WriteLine("------------------------------");
 
         string query = @"

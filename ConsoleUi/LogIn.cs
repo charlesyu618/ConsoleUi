@@ -11,31 +11,76 @@ namespace ConsoleUi
 
         public static string login()
         {
-            string username;
-            //Console.WriteLine("   Welcome to the Snake Game");
-            Console.WriteLine("            Log in");
+            string username = "";
+            string password = "";
+            Console.WriteLine(" Log in  (press ESC to cancel)");
             Console.WriteLine("------------------------------");
 
             while (true)
             {
-                Console.Write("Enter username (or press 'Esc' to go back): ");
-                username = Console.ReadLine();
+                ConsoleKeyInfo key;
+                Console.Write("Enter username: ");
+                while (true)
+                {
+                    key = Console.ReadKey(true);
+
+                    if (key.Key == ConsoleKey.Enter)
+                    {
+                        Console.WriteLine();
+                        break;
+                    }
+                    else if (key.Key == ConsoleKey.Backspace && username.Length >= 0)
+                    {
+                        if (username.Length > 0)
+                        {
+                            username = username.Substring(0, (username.Length - 1));
+                            Console.Write("\b \b");
+                        }
+                    }
+                    else if (key.Key == ConsoleKey.Escape)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        username += key.KeyChar;
+                        Console.Write(key.KeyChar);
+                    }
+                }
 
                 Console.Write("Enter password: ");
-                string password = ReadPassword();
+                while (true)
+                {
+                    key = Console.ReadKey(true);
+
+                    if (key.Key == ConsoleKey.Enter)
+                    {
+                        Console.WriteLine();
+                        break;
+                    }
+                    else if (key.Key == ConsoleKey.Escape)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        password += key.KeyChar;
+                        Console.Write("*");
+                    }
+                }
 
                 if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 {
                     Console.Clear();
                     Console.WriteLine("Please fill mandatory fields!\n");
-                    Console.WriteLine("            Log in");
+                    Console.WriteLine(" Log in  (press ESC to cancel)");
                     Console.WriteLine("------------------------------");
                 }
                 else if (!IsUsernameExists(username))
                 {
                     Console.Clear();
                     Console.WriteLine("Login failed, the username does not exist!\n");
-                    Console.WriteLine("            Log in");
+                    Console.WriteLine(" Log in  (press ESC to cancel)");
                     Console.WriteLine("------------------------------");
                 }
                 else
@@ -50,15 +95,13 @@ namespace ConsoleUi
                         bool isPasswordValid = BCrypt.Net.BCrypt.Verify(password, storedHashedPassword);
                         if (isPasswordValid)
                         {
-                            Console.WriteLine("Login successful!");
-                            // Figure out after Login successful how to pass the gamer info (gamer_id) to game start page
                             break;
                         }
                         else
                         {
                             Console.Clear();
                             Console.WriteLine("Incorrect password, please try again!\n");
-                            Console.WriteLine("            Log in");
+                            Console.WriteLine(" Log in  (press ESC to cancel)");
                             Console.WriteLine("------------------------------");
                         }
                     }
@@ -80,34 +123,6 @@ namespace ConsoleUi
                     return count > 0;
                 }
             }
-        }
-
-        static string ReadPassword()
-        {
-            string password = "";
-            while (true)
-            {
-                ConsoleKeyInfo key = Console.ReadKey(true);
-                if (key.Key == ConsoleKey.Enter)
-                {
-                    Console.WriteLine();
-                    break;
-                }
-                else if (key.Key == ConsoleKey.Backspace && password.Length >= 0)
-                {
-                    if (password.Length > 0)
-                    {
-                        password = password.Substring(0, (password.Length - 1));
-                        Console.Write("\b \b");
-                    }
-                }
-                else
-                {
-                    password += key.KeyChar;
-                    Console.Write("*");
-                }
-            }
-            return password;
         }
     }
 }

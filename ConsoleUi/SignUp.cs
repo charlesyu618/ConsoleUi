@@ -11,41 +11,121 @@ namespace ConsoleUi
 
         public static string register()
         {
-            string username;
-            //Console.WriteLine("   Welcome to the Snake Game");
-            Console.WriteLine("           Sign Up");
+            string username = "";
+            string password = "";
+            string confirmPassword = "";
+            Console.WriteLine(" Sign Up (press ESC to cancel)");
             Console.WriteLine("------------------------------");
 
             while (true)
             {
+                ConsoleKeyInfo key;
                 Console.Write("Enter username: ");
-                username = Console.ReadLine();
+                while (true)
+                {
+                    key = Console.ReadKey(true);
+
+                    if (key.Key == ConsoleKey.Enter)
+                    {
+                        Console.WriteLine();
+                        break;
+                    }
+                    else if (key.Key == ConsoleKey.Backspace && username.Length >= 0)
+                    {
+                        if (username.Length > 0)
+                        {
+                            username = username.Substring(0, (username.Length - 1));
+                            Console.Write("\b \b");
+                        }
+                    }
+                    else if (key.Key == ConsoleKey.Escape)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        username += key.KeyChar;
+                        Console.Write(key.KeyChar);
+                    }
+                }
 
                 Console.Write("Enter password: ");
-                string password = ReadPassword();
+                while (true)
+                {
+                    key = Console.ReadKey(true);
+
+                    if (key.Key == ConsoleKey.Enter)
+                    {
+                        Console.WriteLine();
+                        break;
+                    }
+                    else if (key.Key == ConsoleKey.Backspace && password.Length >= 0)
+                    {
+                        if (password.Length > 0)
+                        {
+                            password = password.Substring(0, (password.Length - 1));
+                            Console.Write("\b \b");
+                        }
+                    }
+                    else if (key.Key == ConsoleKey.Escape)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        password += key.KeyChar;
+                        Console.Write("*");
+                    }
+                }
 
                 Console.Write("Confirm password: ");
-                string confirmPassword = ReadPassword();
+                while (true)
+                {
+                    key = Console.ReadKey(true);
+
+                    if (key.Key == ConsoleKey.Enter)
+                    {
+                        Console.WriteLine();
+                        break;
+                    }
+                    else if (key.Key == ConsoleKey.Backspace && confirmPassword.Length >= 0)
+                    {
+                        if (confirmPassword.Length > 0)
+                        {
+                            confirmPassword = password.Substring(0, (confirmPassword.Length - 1));
+                            Console.Write("\b \b");
+                        }
+                    }
+                    else if (key.Key == ConsoleKey.Escape)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        confirmPassword += key.KeyChar;
+                        Console.Write("*");
+                    }
+                }
 
                 if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmPassword))
                 {
                     Console.Clear();
                     Console.WriteLine("Please fill mandatory fields!\n");
-                    Console.WriteLine("           Sign Up");
+                    Console.WriteLine(" Sign Up (press ESC to cancel)");
                     Console.WriteLine("------------------------------");
                 }
                 else if (password != confirmPassword)
                 {
                     Console.Clear();
                     Console.WriteLine("Password does not match!\n");
-                    Console.WriteLine("           Sign Up");
+                    Console.WriteLine(" Sign Up (press ESC to cancel)");
                     Console.WriteLine("------------------------------");
                 }
                 else if (IsUsernameExists(username))
                 {
                     Console.Clear();
                     Console.WriteLine("Username already exists. Please try another!\n");
-                    Console.WriteLine("           Sign Up");
+                    Console.WriteLine(" Sign Up (press ESC to cancel)");
                     Console.WriteLine("------------------------------");
                 }
                 else
@@ -82,34 +162,6 @@ namespace ConsoleUi
                     return count > 0;
                 }
             }
-        }
-
-        static string ReadPassword()
-        {
-            string password = "";
-            while (true)
-            {
-                ConsoleKeyInfo key = Console.ReadKey(true);
-                if (key.Key == ConsoleKey.Enter)
-                {
-                    Console.WriteLine();
-                    break;
-                }
-                else if (key.Key == ConsoleKey.Backspace && password.Length > 0)
-                {
-                    if (password.Length > 0)
-                    {
-                        password = password.Substring(0, (password.Length - 1));
-                        Console.Write("\b \b");
-                    }
-                }
-                else
-                {
-                    password += key.KeyChar;
-                    Console.Write("*");
-                }
-            }
-            return password;
         }
     }
 }

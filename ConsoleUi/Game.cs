@@ -79,6 +79,9 @@ namespace ConsoleUi
                 // Snake touch the fruit --> Score increase
                 else if (snake.Head == fruit.Location)
                 {
+                    MusicPlayer musicPlayer = new MusicPlayer();
+                    musicPlayer.PlayBackgroundMusic2();
+
                     preFruit = fruit.Location;
                     snake.Move(canvas, true, preFruit);
                     score.Current += fruit.Value;
@@ -168,13 +171,16 @@ namespace ConsoleUi
         {
             GameOver = true;
 
-            DateTime currentDateWithCurrentTime = DateTime.Now.Date + DateTime.Now.TimeOfDay;
+            MusicPlayer musicPlayer = new MusicPlayer();
+            musicPlayer.PlayBackgroundMusic3();
 
+            DateTime currentDateWithCurrentTime = DateTime.Now.Date + DateTime.Now.TimeOfDay;
 
             Program.InsertScore(GamerId, currentDateWithCurrentTime, score.Current);
 
             if (gamer.AskRestart(score.Current))
             {
+                musicPlayer.StopBackgroundMusic();
                 Console.Clear();
                 Initialize();
                 Start(GamerId);

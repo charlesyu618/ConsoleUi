@@ -1,6 +1,5 @@
 using System;
 using System.Data.SqlClient;
-using System.Xml.Linq;
 
 namespace ConsoleUi
 {
@@ -11,10 +10,8 @@ namespace ConsoleUi
 
         static void Main(string[] args)
         {
-            Thread musicThread = new Thread(musicPlayer.PlayBackgroundMusic1);
-            musicThread.Start();
-
-            Program.MainMenu();
+            musicPlayer.PlayBackgroundMusic1(true);
+            MainMenu();
         }
 
         static void MainMenu()
@@ -23,7 +20,7 @@ namespace ConsoleUi
 
             while (true)
             {
-                Console.WriteLine("   Welcome to the Snake Game");
+                Console.WriteLine("  Welcome to the Snake Game");
                 Console.WriteLine("------------------------------");
                 Console.WriteLine("1. Login");
                 Console.WriteLine("2. Sign Up");
@@ -38,14 +35,28 @@ namespace ConsoleUi
                         Console.Clear();
                         userName = Login.login();
                         Console.Clear();
-                        GameMenu(userName);
+                        if (userName == null)
+                        {
+                            MainMenu();
+                        }
+                        else
+                        {
+                            GameMenu(userName);
+                        }
                         break;
 
                     case "2":
                         Console.Clear();
                         userName = SignUp.register();
                         Console.Clear();
-                        GameMenu(userName);
+                        if (userName == null)
+                        {
+                            MainMenu();
+                        }
+                        else
+                        {
+                            GameMenu(userName);
+                        }
                         break;
 
                     case "3":
@@ -69,7 +80,6 @@ namespace ConsoleUi
 
         static void GameMenu(string name)
         {
-  
             int gamerID = -1;
 
             // Get gamer_id from db
@@ -118,7 +128,8 @@ namespace ConsoleUi
                     case "1":
                         musicPlayer.StopBackgroundMusic();
                         Console.Clear();
-                        gameScore = new ConsoleUi.Game().Start(gamerID);
+                        gameScore = new Game().Start(gamerID);
+                        musicPlayer.PlayBackgroundMusic1(true);
                         Console.Clear();
                         break;
 
@@ -173,31 +184,31 @@ namespace ConsoleUi
                         Leaderboard.DisplayLeaderboardOverall();
                         Console.Clear();
                         break;
-                    
+
                     case "2":
                         Console.Clear();
                         Leaderboard.DisplayLeaderboardDaily();
                         Console.Clear();
                         break;
-                    
+
                     case "3":
                         Console.Clear();
                         Leaderboard.DisplayLeaderboardWeekly();
                         Console.Clear();
                         break;
-                    
+
                     case "4":
                         Console.Clear();
                         Leaderboard.DisplayLeaderboardMonthly();
                         Console.Clear();
                         break;
-                    
+
                     case "X":
                     case "x":
                         backToMainMenu = true;
                         Console.Clear();
                         break;
-                    
+
                     default:
                         Console.Clear();
                         Console.WriteLine("Invalid choice. Please select a valid option.\n");
@@ -206,7 +217,7 @@ namespace ConsoleUi
             }
         }
 
-        static void ViewHistoryScores(int gamerID,string name)
+        static void ViewHistoryScores(int gamerID, string name)
         {
             bool backToGameMenu = false;
 
@@ -223,13 +234,13 @@ namespace ConsoleUi
                 {
                     case "1":
                         Console.Clear();
-                        UserHistoryScores.DisplayTop10HistoryScores(gamerID,name);
+                        UserHistoryScores.DisplayTop10HistoryScores(gamerID, name);
                         Console.Clear();
                         break;
 
                     case "2":
                         Console.Clear();
-                        UserHistoryScores.DisplayRecent10HistoryScores(gamerID,name);
+                        UserHistoryScores.DisplayRecent10HistoryScores(gamerID, name);
                         Console.Clear();
                         break;
 
@@ -264,7 +275,6 @@ namespace ConsoleUi
                     command.ExecuteNonQuery();
                 }
             }
-
         }
     }
 }

@@ -59,8 +59,8 @@ namespace ConsoleUi
 
         public static void DisplayLeaderboardDaily()
         {
-            Console.WriteLine(" Today's Top 10 Leaderboard Scores");
-            Console.WriteLine("------------------------------");
+            Console.WriteLine("Today's Top 10 Leaderboard Scores");
+            Console.WriteLine("---------------------------------");
 
             string query = @"SELECT TOP 10 
                                    RANK() OVER (PARTITION BY s.gamer_id ORDER BY MAX(s.score) DESC) as rank,
@@ -112,8 +112,8 @@ namespace ConsoleUi
 
         public static void DisplayLeaderboardWeekly()
         {
-            Console.WriteLine(" This Week's Top 10 Leaderboard Scores");
-            Console.WriteLine("------------------------------");
+            Console.WriteLine("This Week's Top 10 Leaderboard Scores");
+            Console.WriteLine("-------------------------------------");
 
             string query = @"SELECT TOP 10 
                                    RANK() OVER (PARTITION BY s.gamer_id ORDER BY MAX(s.score) DESC) as rank,
@@ -165,8 +165,8 @@ namespace ConsoleUi
 
         public static void DisplayLeaderboardMonthly()
         {
-            Console.WriteLine(" This Month's Top 10 Leaderboard Scores");
-            Console.WriteLine("------------------------------");
+            Console.WriteLine("This Month's Top 10 Leaderboard Scores");
+            Console.WriteLine("--------------------------------------");
 
             string query = @"SELECT TOP 10 
                                    RANK() OVER (PARTITION BY s.gamer_id ORDER BY MAX(s.score) DESC) as rank,
