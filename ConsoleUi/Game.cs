@@ -24,7 +24,7 @@ namespace ConsoleUi
 
 
         // Special fruit effects
-        public bool OneMoreLife { get; set; } = false;  // One more life
+        public int OneMoreLife { get; set; } = 0;  // One more life
         public bool ConstantSpeed { get; set; } = false;   // Constant speed
 
         // Whether the game is pause
@@ -73,8 +73,11 @@ namespace ConsoleUi
                 // Snake touch itself --> End game
                 if (snake.Tail.Contains(snake.Head))
                 {
-                    EndGame(GamerId);
-                    return score.Current;
+                    if (OneMoreLife == 0)   // If still have live, not die
+                    {
+                        EndGame(GamerId);
+                        return score.Current;
+                    }
                 }
                 // Snake touch the fruit --> Score increase
                 else if (snake.Head == fruit.Location)
@@ -83,16 +86,22 @@ namespace ConsoleUi
                     musicPlayer.PlayBackgroundMusic2();
 
                     preFruit = fruit.Location;
+                    // Reduce the OneMoreLife
+                    if(OneMoreLife > 0)
+                    {
+                        OneMoreLife--;
+                    }
                     snake.Move(canvas, true, preFruit);
+
                     score.Current += fruit.Value;
 
                     // For special fruit
-                    if (fruit.TypeValue == 8)   // One more life
+                    if (fruit.TypeValue == 17)   // One more life
                     {
-                        OneMoreLife = true;
+                        OneMoreLife = 40;
                         Console.Title = "One more live!";
                     }
-                    else if (fruit.TypeValue == 9)
+                    else if (fruit.TypeValue == 18 || fruit.TypeValue == 19)
                     {
                         ConstantSpeed = true;
                         Console.Title = "Constant Speed";
@@ -110,14 +119,18 @@ namespace ConsoleUi
                 // Snake touch the edge --> End game
                 else if (snake.ReachEdge == true)
                 {
-                    if (OneMoreLife != true)    // Check for the special fruit
+                    if (OneMoreLife == 0)    // Check for the special fruit
                     {
                         EndGame(GamerId);
                         return score.Current;
                     }
                     else
                     {
-                        OneMoreLife = false;
+                        if (OneMoreLife > 0)
+                        {
+                            OneMoreLife--;
+                        }
+
                         snake.Move(canvas, false, preFruit);
                     }
                 }
@@ -153,7 +166,7 @@ namespace ConsoleUi
                     }
                     else if (ConstantSpeed)
                     {
-                        sleepDuration /= 3;
+                        sleepDuration /= 4;
                     }
                     else
                     {
