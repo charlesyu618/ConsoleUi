@@ -115,9 +115,10 @@ namespace ConsoleUi
                 }
 
                 Console.WriteLine("1. Game Start!");
-                Console.WriteLine("2. View Leaderboard");
-                Console.WriteLine("3. My History Scores");
-                Console.WriteLine("4. Log Out");
+                Console.WriteLine("2. Show Game Rules");
+                Console.WriteLine("3. View Leaderboard");
+                Console.WriteLine("4. My History Scores");
+                Console.WriteLine("5. Log Out");
                 Console.WriteLine("x. Exit");
                 Console.Write("Please select an option: ");
                 string choice = Console.ReadLine();
@@ -136,19 +137,24 @@ namespace ConsoleUi
 
                     case "2":
                         Console.Clear();
-                        ViewLeaderboard();
-                        Console.Clear();
+                        GameRules.Show();
                         break;
 
                     case "3":
                         Console.Clear();
-                        ViewHistoryScores(gamerID, name);
-                        return;
+                        ViewLeaderboard();
+                        Console.Clear();
+                        break;
 
                     case "4":
                         Console.Clear();
+                        ViewHistoryScores(gamerID, name);
+                        break;
+
+                    case "5":
+                        Console.Clear();
                         MainMenu();
-                        return;
+                        break;
 
                     case "X":
                     case "x":
