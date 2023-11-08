@@ -91,7 +91,7 @@ namespace ConsoleUi
 
                     preFruit = fruit.Location;
                     // Reduce the OneMoreLife
-                    if(OneMoreLife > 0)
+                    if (OneMoreLife > 0)
                     {
                         OneMoreLife--;
                     }

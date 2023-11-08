@@ -40,21 +40,8 @@ namespace ConsoleUi
                 }
             }
 
-            // wait for user to quit
-            while (true)
-            {
-                Console.Write("Press 'x' to quit: ");
-                string userInput = Console.ReadLine();
-
-                if (userInput.ToLower() == "x")
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid choice. Please select a valid option.");
-                }
-            }
+            Console.Write("Press any key to return to the menu...");
+            Console.ReadKey();
         }
 
         public static void DisplayLeaderboardDaily()
@@ -62,9 +49,8 @@ namespace ConsoleUi
             Console.WriteLine("Today's Top 10 Leaderboard Scores");
             Console.WriteLine("---------------------------------");
 
-            string query = @"SELECT TOP 10 
-                                   RANK() OVER (PARTITION BY s.gamer_id ORDER BY MAX(s.score) DESC) as rank,
-                                   s.gamer_id, g.gamer_name, MAX(s.score) AS max_score
+            string query = @"SELECT TOP 10 RANK() OVER (PARTITION BY s.gamer_id ORDER BY MAX(s.score) DESC) as rank, 
+                             s.gamer_id, g.gamer_name, MAX(s.score) AS max_score
                              FROM [leaderboard].[dbo].[Gamer] g 
                              JOIN [leaderboard].[dbo].[Score] s ON g.gamer_id = s.gamer_id
                              WHERE DATEPART(day, s.date_time) = DATEPART(day, GETDATE())
@@ -93,21 +79,8 @@ namespace ConsoleUi
                 }
             }
 
-            // wait for user to quit
-            while (true)
-            {
-                Console.Write("Press 'x' to quit: ");
-                string userInput = Console.ReadLine();
-
-                if (userInput.ToLower() == "x")
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid choice. Please select a valid option.");
-                }
-            }
+            Console.Write("Press any key to return to the menu...");
+            Console.ReadKey();
         }
 
         public static void DisplayLeaderboardWeekly()
@@ -115,9 +88,8 @@ namespace ConsoleUi
             Console.WriteLine("This Week's Top 10 Leaderboard Scores");
             Console.WriteLine("-------------------------------------");
 
-            string query = @"SELECT TOP 10 
-                                   RANK() OVER (PARTITION BY s.gamer_id ORDER BY MAX(s.score) DESC) as rank,
-                                   s.gamer_id, g.gamer_name, MAX(s.score) AS max_score
+            string query = @"SELECT TOP 10 RANK() OVER (PARTITION BY s.gamer_id ORDER BY MAX(s.score) DESC) as rank,
+                             s.gamer_id, g.gamer_name, MAX(s.score) AS max_score
                              FROM [leaderboard].[dbo].[Gamer] g 
                              JOIN [leaderboard].[dbo].[Score] s ON g.gamer_id = s.gamer_id
                              WHERE DATEPART(week, s.date_time) = DATEPART(week, GETDATE())
@@ -146,21 +118,8 @@ namespace ConsoleUi
                 }
             }
 
-            // wait for user to quit
-            while (true)
-            {
-                Console.Write("Press 'x' to quit: ");
-                string userInput = Console.ReadLine();
-
-                if (userInput.ToLower() == "x")
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid choice. Please select a valid option.");
-                }
-            }
+            Console.Write("Press any key to return to the menu...");
+            Console.ReadKey();
         }
 
         public static void DisplayLeaderboardMonthly()
@@ -168,9 +127,8 @@ namespace ConsoleUi
             Console.WriteLine("This Month's Top 10 Leaderboard Scores");
             Console.WriteLine("--------------------------------------");
 
-            string query = @"SELECT TOP 10 
-                                   RANK() OVER (PARTITION BY s.gamer_id ORDER BY MAX(s.score) DESC) as rank,
-                                   s.gamer_id, g.gamer_name, MAX(s.score) AS max_score
+            string query = @"SELECT TOP 10 RANK() OVER (PARTITION BY s.gamer_id ORDER BY MAX(s.score) DESC) as rank,
+                             s.gamer_id, g.gamer_name, MAX(s.score) AS max_score
                              FROM [leaderboard].[dbo].[Gamer] g 
                              JOIN [leaderboard].[dbo].[Score] s ON g.gamer_id = s.gamer_id
                              WHERE DATEPART(month, s.date_time) = DATEPART(month, GETDATE())
@@ -199,21 +157,8 @@ namespace ConsoleUi
                 }
             }
 
-            // wait for user to quit
-            while (true)
-            {
-                Console.Write("Press 'x' to quit: ");
-                string userInput = Console.ReadLine();
-
-                if (userInput.ToLower() == "x")
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid choice. Please select a valid option.");
-                }
-            }
+            Console.Write("Press any key to return to the menu...");
+            Console.ReadKey();
         }
     }
 }

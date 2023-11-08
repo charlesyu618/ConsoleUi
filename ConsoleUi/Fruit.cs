@@ -28,7 +28,6 @@ namespace ConsoleUi
 
         public void Spawn(Canvas canvas, Snake snake, Score score)
         {
-
             Location = Utility.GetRandomSafePoint(canvas, snake.Points);
 
             // judge whether the fruit is special
@@ -61,7 +60,7 @@ namespace ConsoleUi
                 FruitType = Effect.Slower;  // Move slower
                 Value = 1;
                 Utility.Write(Value.ToString(), Location.X, Location.Y, ConsoleColor.Green, Settings.Fruit.Background);
-                
+
             }
         }
     }

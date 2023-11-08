@@ -1,9 +1,8 @@
-﻿// GameRules.cs
-using System;
+﻿using System;
 
 public static class GameRules
 {
-    public static void Show()
+    public static void Page()
     {
         Console.WriteLine("          Game Rules          ");
         Console.WriteLine("------------------------------");

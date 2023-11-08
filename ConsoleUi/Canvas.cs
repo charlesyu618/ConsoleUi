@@ -55,7 +55,6 @@ namespace ConsoleUi
                 //    Console.SetBufferSize(Settings.Canvas.Size.Right, Settings.Canvas.Size.Bottom);
                 //}
                 Console.CursorVisible = false;
-
             }
         }
     }
