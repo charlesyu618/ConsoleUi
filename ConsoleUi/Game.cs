@@ -78,6 +78,10 @@ namespace ConsoleUi
                         EndGame(GamerId);
                         return score.Current;
                     }
+                    else
+                    {
+                        snake.Move(canvas, false, preFruit);
+                    }
                 }
                 // Snake touch the fruit --> Score increase
                 else if (snake.Head == fruit.Location)

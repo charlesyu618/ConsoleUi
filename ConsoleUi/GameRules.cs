@@ -8,8 +8,8 @@ public static class GameRules
         Console.WriteLine("          Game Rules          ");
         Console.WriteLine("------------------------------");
         Console.WriteLine("Fruit");
-        Console.WriteLine("Red:   One more life.");
-        Console.WriteLine("Green: Constant Speed\n");
+        Console.WriteLine("Red:   Ghost Mode 40 steps");
+        Console.WriteLine("Green: Change Speed\n");
         Console.WriteLine("Speed Stage");
         Console.WriteLine("Slow:        0 < Score <= 20");
         Console.WriteLine("Medium:     20 < Score <= 50");
