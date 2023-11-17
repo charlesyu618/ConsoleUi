@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -19,6 +19,8 @@ namespace ConsoleUi
         private DateTime fruitTime = DateTime.Now;  // store the fruit time 
 
         private Point preFruit = new Point();   // store the location of previous fruit
+
+        private Point lastGameLocation = new Point(0, 0);
 
         public bool GameOver { get; set; } = false;
 
@@ -46,9 +48,34 @@ namespace ConsoleUi
 
         public int Start(int GamerId)
         {
-
             while (!GameOver)
             {
+                if (lastGameLocation.X == 0 && lastGameLocation.Y == 0)
+                {
+                    Utility.Write("┌", lastGameLocation.X, lastGameLocation.Y, Settings.Canvas.BorderForeground, Settings.Canvas.BorderBackground);
+                }
+                else if(lastGameLocation.X == 0 ||  lastGameLocation.X == 49)
+                {
+                    if(lastGameLocation.Y != 0)
+                    {
+                        Utility.Write("│", lastGameLocation.X, lastGameLocation.Y, Settings.Canvas.BorderForeground, Settings.Canvas.BorderBackground);
+                    }
+                }
+                else if(lastGameLocation.Y == 0 || lastGameLocation.Y == 24)
+                {
+                    if (lastGameLocation.X != 0)
+                    {
+                        Utility.Write("─", lastGameLocation.X, lastGameLocation.Y, Settings.Canvas.BorderForeground, Settings.Canvas.BorderBackground);
+                    }
+                }
+
+
+
+
+              
+
+
+
                 if (Console.KeyAvailable)
                 {
                     var keyInfo = Console.ReadKey(true);
@@ -75,11 +102,16 @@ namespace ConsoleUi
                 {
                     if (OneMoreLife == 0)   // If still have live, not die
                     {
+                        lastGameLocation = snake.Head;
                         EndGame(GamerId);
                         return score.Current;
                     }
                     else
                     {
+                        if (OneMoreLife > 0)
+                        {
+                            OneMoreLife--;
+                        }
                         snake.Move(canvas, false, preFruit);
                     }
                 }
@@ -123,28 +155,21 @@ namespace ConsoleUi
                 // Snake touch the edge --> End game
                 else if (snake.ReachEdge == true)
                 {
-                    if (OneMoreLife == 0)    // Check for the special fruit
-                    {
-                        EndGame(GamerId);
-                        return score.Current;
-                    }
-                    else
-                    {
-                        if (OneMoreLife > 0)
-                        {
-                            OneMoreLife--;
-                        }
-
-                        snake.Move(canvas, false, preFruit);
-                    }
+                    lastGameLocation = snake.Head;
+                    EndGame(GamerId);
+                    return score.Current;
                 }
                 else
                 {
+                    if (OneMoreLife > 0)
+                    {
+                        OneMoreLife--;
+                    }
                     snake.Move(canvas, false, preFruit);
                 }
 
                 // The fruit's location will change
-                if (score.Current > 20 && DateTime.Now - fruitTime > TimeSpan.FromSeconds(9 - fruit.Value))
+                if (score.Current > 30 && DateTime.Now - fruitTime > TimeSpan.FromSeconds(9 - fruit.Value))
                 {
                     canvas.Erase(fruit.Location);
                     fruit.Spawn(canvas, snake, score);
@@ -203,6 +228,11 @@ namespace ConsoleUi
                 Start(GamerId);
             }
             musicPlayer.StopBackgroundMusic();
+        }
+
+        public void fillEmptyWall(Point lastHead)
+        {
+            
         }
     }
 }

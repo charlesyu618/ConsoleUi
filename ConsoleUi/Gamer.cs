@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleUi
 {
     public class Gamer
     {
-        public string Email { get; set; } = default!;
-
-        public string Name { get; set; } = default!;
+        public string Email { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         public bool TryLookup(string email, out string name)
         {
@@ -24,11 +19,16 @@ namespace ConsoleUi
 
         public bool AskRestart(int score)
         {
-            Utility.Write($"Score: {score}", 20, 10, ConsoleColor.Red, ConsoleColor.White);
-            Utility.Write("Game Over! Do you want to restart? (Y/N)", 5, 11, ConsoleColor.Red, ConsoleColor.White);
+            const int scoreX = 20;
+            const int scoreY = 10;
+            const int messageX = 5;
+            const int messageY = 11;
+
+            Utility.Write($"Score: {score}", scoreX, scoreY, ConsoleColor.Red, ConsoleColor.White);
+            Utility.Write("Game Over! Do you want to restart? (Y/N)", messageX, messageY, ConsoleColor.Red, ConsoleColor.White);
+
             Utility.WaitFor(out var key, ConsoleKey.Y, ConsoleKey.N);
             return key == ConsoleKey.Y;
         }
-
     }
 }

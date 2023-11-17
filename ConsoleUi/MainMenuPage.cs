@@ -33,6 +33,7 @@ public static class MainMenu
                     }
                     else
                     {
+                        musicPlayer.StopBackgroundMusic();
                         GameMenu.Page(userName);
                     }
                     break;

@@ -9,6 +9,7 @@ public static class GameMenu
 
     public static void Page(string name)
     {
+
         int gamerID = -1;
 
         // Get gamer_id from db

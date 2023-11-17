@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,7 +35,6 @@ namespace ConsoleUi
 
             // Write the top row
             Utility.Write(topRow, Border.Left, Border.Top, Settings.Canvas.BorderForeground, Settings.Canvas.BorderBackground);
-
             // Write the middle rows
             for (int y = Border.Top + 1; y < Border.Top + Border.Height - 1; y++)
             {
