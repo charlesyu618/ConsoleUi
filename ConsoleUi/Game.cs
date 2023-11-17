@@ -50,31 +50,7 @@ namespace ConsoleUi
         {
             while (!GameOver)
             {
-                if (lastGameLocation.X == 0 && lastGameLocation.Y == 0)
-                {
-                    Utility.Write("┌", lastGameLocation.X, lastGameLocation.Y, Settings.Canvas.BorderForeground, Settings.Canvas.BorderBackground);
-                }
-                else if(lastGameLocation.X == 0 ||  lastGameLocation.X == 49)
-                {
-                    if(lastGameLocation.Y != 0)
-                    {
-                        Utility.Write("│", lastGameLocation.X, lastGameLocation.Y, Settings.Canvas.BorderForeground, Settings.Canvas.BorderBackground);
-                    }
-                }
-                else if(lastGameLocation.Y == 0 || lastGameLocation.Y == 24)
-                {
-                    if (lastGameLocation.X != 0)
-                    {
-                        Utility.Write("─", lastGameLocation.X, lastGameLocation.Y, Settings.Canvas.BorderForeground, Settings.Canvas.BorderBackground);
-                    }
-                }
-
-
-
-
-              
-
-
+                fillEmptyWall(lastGameLocation);
 
                 if (Console.KeyAvailable)
                 {
@@ -232,7 +208,24 @@ namespace ConsoleUi
 
         public void fillEmptyWall(Point lastHead)
         {
-            
+            if (lastHead.X == 0 && lastHead.Y == 0)
+            {
+                Utility.Write("┌", lastHead.X, lastHead.Y, Settings.Canvas.BorderForeground, Settings.Canvas.BorderBackground);
+            }
+            else if (lastHead.X == 0 ||  lastHead.X == 49)
+            {
+                if (lastHead.Y != 0)
+                {
+                    Utility.Write("│", lastHead.X, lastHead.Y, Settings.Canvas.BorderForeground, Settings.Canvas.BorderBackground);
+                }
+            }
+            else if (lastHead.Y == 0 || lastHead.Y == 24)
+            {
+                if (lastHead.X != 0)
+                {
+                    Utility.Write("─", lastHead.X, lastHead.Y, Settings.Canvas.BorderForeground, Settings.Canvas.BorderBackground);
+                }
+            }
         }
     }
 }
